@@ -52,8 +52,7 @@ Alternatively, you can also download a similar dataset from [Kaggle](https://www
 
 ### Usage
 
-- **Direct Download**: You can download the dataset directly from this repository and store it on your local system.
-- **Google Drive**: Alternatively, you can store the dataset in your Google Drive and mount it using the provided code to replicate the environment used in this project.
+- **Local Download**: You can clone this repository and run it locally following the instructions below.
 
 ## Dependencies
 
@@ -78,25 +77,13 @@ pip install pandas numpy seaborn matplotlib scikit-learn tensorflow keras
 
 ```
 .
-├── Lung_Cancer_Prediction.ipynb
-├── README.md
-├── dataset
-│ ├── train
-│ │ ├── adenocarcinoma_left.lower.lobe_T2_N0_M0_Ib
-│ │ ├── large.cell.carcinoma_left.hilum_T2_N2_M0_IIIa
-│ │ ├── normal
-│ │ └── squamous.cell.carcinoma_left.hilum_T1_N2_M0_IIIa
-│ ├── test
-│ │ ├── adenocarcinoma_left.lower.lobe_T2_N0_M0_Ib
-│ │ ├── large.cell.carcinoma_left.hilum_T2_N2_M0_IIIa
-│ │ ├── normal
-│ │ └── squamous.cell.carcinoma_left.hilum_T1_N2_M0_IIIa
-│ └── valid
-│ ├── adenocarcinoma_left.lower.lobe_T2_N0_M0_Ib
-│ ├── large.cell.carcinoma_left.hilum_T2_N2_M0_IIIa
-│ ├── normal
-│ └── squamous.cell.carcinoma_left.hilum_T1_N2_M0_IIIa
-└── best_model.hdf5
+├── backend/                # FastAPI backend for model serving
+├── frontend/               # React.js premium landing page & UI
+├── dataset/                # Diagnostic imaging dataset
+├── DEPLOYMENT.md           # Step-by-step hosting guide
+├── LICENSE                 # MIT License (Kushal)
+├── README.md               # Documentation
+└── Lung Cancer Pred_Local.ipynb # Jupyter notebook for local use
 ```
 
 This structure outlines the files and directories included in your project:
@@ -116,20 +103,15 @@ This structure outlines the files and directories included in your project:
 
 The Jupyter Notebook `Lung_Cancer_Prediction.ipynb` contains the code for training the model. Below are the steps involved:
 
-1. **Mount Google Drive**: To access the dataset stored in Google Drive.
-2. **Load and Preprocess Data**: Use `ImageDataGenerator` for data augmentation and normalization.
-3. **Define the Model**: Use the Xception model pre-trained on ImageNet as the base model and add custom layers on top.
-4. **Compile the Model**: Specify the optimizer, loss function, and metrics.
-5. **Train the Model**: Fit the model on the training data and validate it on the validation data. Callbacks like learning rate reduction, early stopping, and model checkpointing are used.
-6. **Save the Model**: Save the trained model for future use.
+1. **Load and Preprocess Data**: Use `ImageDataGenerator` for data augmentation and normalization.
+2. **Define the Model**: Use the Xception model pre-trained on ImageNet as the base model and add custom layers on top.
+3. **Compile the Model**: Specify the optimizer, loss function, and metrics.
+4. **Train the Model**: Fit the model on the training data and validate it on the validation data. Callbacks like learning rate reduction, early stopping, and model checkpointing are used.
+5. **Save the Model**: Save the trained model for future use.
 
 ### Example Usage
 
 ```python
-# Mount Google Drive
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
 # Load and preprocess data
 IMAGE_SIZE = (350, 350)
 train_datagen = ImageDataGenerator(rescale=1./255, horizontal_flip=True)
@@ -172,7 +154,7 @@ history = model.fit(
 )
 
 # Save the model
-model.save('/content/drive/MyDrive/dataset/trained_lung_cancer_model.h5')
+model.save('trained_lung_cancer_model.h5')
 ```
 
 
@@ -195,7 +177,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the trained model
-model = load_model('/content/drive/MyDrive/dataset/trained_lung_cancer_model.h5')
+model = load_model('trained_lung_cancer_model.h5')
 
 def load_and_preprocess_image(img_path, target_size):
     # Load and preprocess the image
@@ -206,7 +188,7 @@ def load_and_preprocess_image(img_path, target_size):
     return img_array
 
 # Example usage with an image path
-img_path = '/content/test_image.png'
+img_path = 'test_image.png'
 target_size = (350, 350)
 
 # Load and preprocess the image
@@ -216,18 +198,11 @@ img = load_and_preprocess_image(img_path, target_size)
 predictions = model.predict(img)
 predicted_class = np.argmax(predictions[0])
 
-# Map the predicted class to the class label
-class_labels = list(train_generator.class_indices.keys())  # Assuming `train_generator` is defined
+# Map the predicted class label
 predicted_label = class_labels[predicted_class]
 
 # Print the predicted class
 print(f"The image belongs to class: {predicted_label}")
-
-# Display the image with the predicted class
-plt.imshow(image.load_img(img_path, target_size=target_size))
-plt.title(f"Predicted: {predicted_label}")
-plt.axis('off')
-plt.show()
 ```
 
 
