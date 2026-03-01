@@ -9,6 +9,13 @@
   --glass-bg: rgba(15, 23, 42, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
   --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  --container-padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+  }
 }
 
 * {
@@ -32,7 +39,7 @@ body {
 .app-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--container-padding);
   position: relative;
   z-index: 1;
 }
@@ -42,14 +49,25 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
-  padding: 1.5rem 2rem;
+  padding: 1.2rem var(--container-padding);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: rgba(5, 10, 21, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(5, 10, 21, 0.85);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--glass-border);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    /* Hide traditional nav on very small screens or use hamburger */
+  }
+
+  .navbar .btn-primary {
+    display: none;
+  }
 }
 
 .nav-links {
@@ -123,17 +141,31 @@ section {
 
 .section-title {
   text-align: center;
-  font-size: 3rem;
-  margin-bottom: 4rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 3rem;
   font-weight: 700;
 }
 
 /* Hero Section */
 .hero-section {
-  min-height: 90vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  gap: 4rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 4rem;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
 }
 
 .hero-content {
@@ -150,8 +182,8 @@ section {
 }
 
 .scanner-visual {
-  width: 400px;
-  height: 400px;
+  width: min(400px, 80vw);
+  height: min(400px, 80vw);
   border-radius: 50%;
   background: radial-gradient(circle at center, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
   position: relative;
@@ -193,19 +225,19 @@ section {
 }
 
 .feature-card {
-  padding: 3rem;
+  padding: 2rem;
   text-align: left;
 }
 
 .feature-icon {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   background: rgba(59, 130, 246, 0.1);
-  border-radius: 16px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--accent-primary);
 }
 
@@ -230,7 +262,14 @@ section {
 .analysis-wrapper {
   background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
   border-radius: 40px;
-  padding: 4rem 2rem;
+  padding: 3rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .analysis-wrapper {
+    padding: 2rem 0.5rem;
+    border-radius: 20px;
+  }
 }
 
 /* Typography Extensions */

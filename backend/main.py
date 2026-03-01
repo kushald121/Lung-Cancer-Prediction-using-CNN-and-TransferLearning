@@ -12,10 +12,10 @@ import io
 app = FastAPI(title="Lung Cancer Prediction API")
 
 # Configure CORS
-cors_origins = os.environ.get("CORS_ORIGINS", "*").split(",")
+# For maximum compatibility between local dev and deployed backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins, 
+    allow_origins=["*"], # Allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

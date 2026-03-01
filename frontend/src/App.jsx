@@ -31,17 +31,17 @@ const Hero = () => (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        style={{ display: 'inline-flex', padding: '6px 15px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '20px', color: '#3b82f6', fontSize: '0.85rem', fontWeight: 600, marginBottom: '2rem' }}>
+        style={{ display: 'inline-flex', padding: '6px 15px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '20px', color: '#3b82f6', fontSize: '0.85rem', fontWeight: 600, marginBottom: '1.5rem' }}>
         XCEPTION MODEL v2.0 READY
       </motion.div>
-      <h1 style={{ fontSize: '4.5rem', lineHeight: 1.1, marginBottom: '2rem' }}>
+      <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
         Precision <span className="gradient-text">Diagnostics</span> Driven by AI.
       </h1>
-      <p style={{ color: '#94a3b8', fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '550px' }}>
+      <p style={{ color: '#94a3b8', fontSize: 'clamp(1rem, 3vw, 1.25rem)', marginBottom: '2.5rem', maxWidth: '550px', marginInline: 'auto' }}>
         A state-of-the-art diagnostic assistant designed to analyze Chest CT scans with high accuracy, providing clinicians with instant secondary insights.
       </p>
-      <div style={{ display: 'flex', gap: '1.5rem' }}>
-        <a href="#analysis" className="btn-primary" style={{ padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <a href="#analysis" className="btn-primary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
           Start Free Analysis <ChevronRight size={18} />
         </a>
         <a href="#technology" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 500 }}>
@@ -124,7 +124,7 @@ const AnalysisTool = () => {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: prediction ? '1fr 1fr' : '1fr', gap: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
         <section className="glass-card" style={{ padding: '2rem' }}>
           <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Upload size={20} color="#3b82f6" /> Digital Intake
@@ -215,7 +215,7 @@ function App() {
 
         <section id="technology" style={{ textAlign: 'center' }}>
           <h2 className="section-title">Built on <span className="gradient-text">Innovation</span></h2>
-          <div className="glass-card" style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', textAlign: 'left' }}>
+          <div className="glass-card" style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', textAlign: 'left' }}>
             <div>
               <h3 style={{ marginBottom: '1.2rem' }}>Xception Architecture</h3>
               <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>
